@@ -9,6 +9,7 @@ const { syncModels } = require('./models');
 // Importar rutas
 const categoriaRoutes = require('./routes/categoria.routes');
 const gastoRoutes = require('./routes/gasto.routes');
+const dashboardRoutes = require('./routes/dashboard.routes');
 
 // Probar conexión a la base de datos al iniciar
 (async () => {
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 // Usar rutas
 app.use('/api/categorias', categoriaRoutes);
 app.use('/api/gastos', gastoRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 // Ruta de prueba
 app.get('/api/health', (req, res) => {
