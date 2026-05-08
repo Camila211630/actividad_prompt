@@ -6,6 +6,9 @@ const app = express();
 const { sequelize, testConnection } = require('./config/database');
 const { syncModels } = require('./models');
 
+// Importar rutas
+const categoriaRoutes = require('./routes/categoria.routes');
+
 // Probar conexión a la base de datos al iniciar
 (async () => {
   const connected = await testConnection();
@@ -18,6 +21,9 @@ const { syncModels } = require('./models');
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Usar rutas
+app.use('/api/categorias', categoriaRoutes);
 
 // Ruta de prueba
 app.get('/api/health', (req, res) => {
