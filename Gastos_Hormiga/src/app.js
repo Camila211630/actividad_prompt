@@ -3,6 +3,17 @@ const cors = require('cors');
 
 const app = express();
 
+const { sequelize, testConnection } = require('./config/database');
+const { syncModels } = require('./models');
+
+// Probar conexión a la base de datos al iniciar
+(async () => {
+  const connected = await testConnection();
+  if (connected) {
+    await syncModels(false); // false = no alterar tablas existentes
+  }
+})();
+
 // Middlewares globales
 app.use(cors());
 app.use(express.json());
