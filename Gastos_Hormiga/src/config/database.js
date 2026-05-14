@@ -1,20 +1,20 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-// Configuración para SQL Server con Autenticación de Windows
+// Configuración para SQL Server con Autenticación SQL (usuario/contraseña)
 const sequelize = new Sequelize(
   process.env.DB_NAME,
-  '',  // Usuario vacío para Windows Auth
-  '',  // Contraseña vacía para Windows Auth
+  process.env.DB_USER,      // Tu usuario SQL (ej: 'sa' o el que creaste)
+  process.env.DB_PASSWORD,  // Tu contraseña
   {
     host: process.env.DB_HOST || 'localhost',
     port: parseInt(process.env.DB_PORT) || 1433,
     dialect: 'mssql',
     dialectOptions: {
       options: {
-        trustedConnection: true,  // 👈 Clave: Autenticación de Windows
         encrypt: false,           // Para SQL Server local
-        trustServerCertificate: true
+        trustServerCertificate: true,
+        enableArithAbort: true
       }
     },
     logging: console.log,
@@ -31,7 +31,8 @@ const sequelize = new Sequelize(
 const testConnection = async () => {
   try {
     await sequelize.authenticate();
-    console.log('✅ Conectado a SQL Server con Autenticación de Windows');
+    console.log('✅ Conectado a SQL Server exitosamente');
+    console.log(`📊 Base de datos: ${process.env.DB_NAME}`);
     return true;
   } catch (error) {
     console.error('❌ Error de conexión:', error.message);
