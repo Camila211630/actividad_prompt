@@ -100,6 +100,7 @@ export interface ApiResponse<T> {
 
 // Filtros para gastos
 export interface GastoFilters {
+  descripcion?: string;
   fechaInicio?: string;
   fechaFin?: string;
   categoriaId?: number;
