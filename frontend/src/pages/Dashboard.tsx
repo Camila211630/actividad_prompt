@@ -66,7 +66,7 @@ const Dashboard: React.FC = () => {
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               <MetricsCard title="Total Gastos" value={`$${dashboard.metricas.totalGastos.toFixed(2)}`} />
               <MetricsCard title="Gastos Hormiga" value={`$${dashboard.metricas.totalGastosHormiga.toFixed(2)}`} />
-              <MetricsCard title="% Hormiga" value={`${dashboard.metricas.porcentajeHormiga.toFixed(1)}%`} />
+              <MetricsCard title="% Hormiga" value={`${Number(dashboard.metricas.porcentajeHormiga).toFixed(1)}%`} />
               <MetricsCard title="Promedio Diario" value={`$${dashboard.metricas.promedioDiario.toFixed(2)}`} />
             </div>
 
