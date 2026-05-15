@@ -142,7 +142,7 @@ const Expenses: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-900">Lista de gastos</h3>
                 <p className="text-sm text-gray-500">Filtra, busca y administra tus registros</p>
               </div>
-              <div className="grid gap-3 sm:grid-cols-2">
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                 <input
                   type="text"
                   placeholder="Buscar descripción"
@@ -167,6 +167,36 @@ const Expenses: React.FC = () => {
                     </option>
                   ))}
                 </select>
+                <select
+                  value={filters.tipoGasto ?? ''}
+                  onChange={(event) =>
+                    setFilters((prev) => ({
+                      ...prev,
+                      tipoGasto: event.target.value ? (event.target.value as Gasto['tipoGasto']) : undefined,
+                    }))
+                  }
+                  className="w-full rounded-2xl border-gray-200 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                >
+                  <option value="">Todos los tipos</option>
+                  <option value="Necesidad">Necesidad</option>
+                  <option value="Deseo">Deseo</option>
+                  <option value="Ahorro">Ahorro</option>
+                  <option value="Hormiga">Hormiga</option>
+                </select>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <input
+                    type="date"
+                    value={filters.fechaInicio ?? ''}
+                    onChange={(event) => setFilters((prev) => ({ ...prev, fechaInicio: event.target.value || undefined }))}
+                    className="w-full rounded-2xl border-gray-200 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  />
+                  <input
+                    type="date"
+                    value={filters.fechaFin ?? ''}
+                    onChange={(event) => setFilters((prev) => ({ ...prev, fechaFin: event.target.value || undefined }))}
+                    className="w-full rounded-2xl border-gray-200 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
               </div>
             </div>
 
